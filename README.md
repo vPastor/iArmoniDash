@@ -140,7 +140,7 @@ src/
 **Victor Pastor Caro**  
 Frontend Developer  
 📧 victorpastorcaro@gnail.com  
-💼 [LinkedIn](https://linkedin.com/in/victorpastorcaro)
+💼 [LinkedIn](https://www.linkedin.com/in/victor-pastor-caro/)
 
 ---
 
