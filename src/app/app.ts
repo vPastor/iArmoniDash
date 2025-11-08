@@ -6,12 +6,14 @@ import { AuthService } from './core/auth';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartData, ChartOptions } from 'chart.js';
 import { Chart, registerables } from 'chart.js'; // 👈 importa registrables
+import { Dashboard } from './dashboard/dashboard'; // 👈 nuevo
+
 Chart.register(...registerables);
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, FormsModule, BaseChartDirective], // 👈 añade FormsModule aquí
+  imports: [ CommonModule, FormsModule, Dashboard], // 👈 añade FormsModule aquí
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

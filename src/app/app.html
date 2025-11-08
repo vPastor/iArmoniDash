@@ -14,56 +14,14 @@
 <div *ngIf="isAuthenticated">
   <button (click)="logout()" style="float: right;">🚪 Cerrar sesión</button>
 
+  <!-- Solo renderiza el dashboard cuando ya terminó la carga y hay datos válidos -->
+  <app-dashboard
+    *ngIf="!isLoading && apiRespuesta && !apiRespuesta.error"
+    [summary]="apiRespuesta">
+  </app-dashboard>
 </div>
 
-<!-- Solo mostrar el dashboard si hay respuesta válida -->
-<div *ngIf="!isLoading && apiRespuesta && !apiRespuesta.error">
-  <hr />
   
-  <h2>Resumen del Dashboard</h2>
-
-  <div class="kpis">
-    <div class="kpi">
-      <h3>Total de ítems</h3>
-      <p>{{ apiRespuesta.total_items }}</p>
-    </div>
-    <div class="kpi">
-      <h3>Ítems faltantes</h3>
-      <p>{{ apiRespuesta.total_missing_items }}</p>
-    </div>
-    <div class="kpi">
-      <h3>Procedimientos totales</h3>
-      <p>{{ apiRespuesta.total_procedures }}</p>
-    </div>
-  </div>
-
-  <h3>Procedimientos por mes:</h3>
-  <table border="1" cellpadding="5">
-    <tr><th>Mes</th><th>Cantidad</th></tr>
-    <tr *ngFor="let mes of obtenerProceduresPorMes()">
-      <td>{{ mes.mes }}</td>
-      <td>{{ mes.valor }}</td>
-    </tr>
-  </table>
-
-  <h3>Gráfico de procedimientos por mes:</h3>
-  <canvas
-    baseChart
-    [data]="chartData"
-    [type]="'bar'"
-    [options]="chartOptions">
-  </canvas>
-</div>
-<!-- Filtro por mes -->
-<div *ngIf="apiRespuesta && !apiRespuesta.error" style="margin: 0.5rem 0;">
-  <label for="mes">Filtrar por mes: </label>
-  <select id="mes" [(ngModel)]="selectedMonth" (ngModelChange)="onMonthChange()">
-    <option [ngValue]="null">Todos</option>
-    <option *ngFor="let kv of apiRespuesta?.procedures_per_month | keyvalue" [value]="kv.key">
-      {{ kv.key }}
-    </option>
-  </select>
-</div>
 
 <!-- Seguimos dejando el JSON de debug visible -->
 <pre>{{ apiRespuesta | json }}</pre>
