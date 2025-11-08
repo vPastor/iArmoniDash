@@ -1,0 +1,7 @@
+{
+  "/internal": {
+    "target": "https://testing.myolm360.com",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
